@@ -6,42 +6,28 @@ from os import listdir
 from os.path import isfile, join
 import send2trash
 
-video_paths=[]
-video_path=""
-Print("After adding all the folders one by one, press y to continue for the question below.")
-while 1:
-    print(video_path)
-    video_path=input("Enter the path : ")
-    if video_path in ['y','Y']:
-        break
-    mypath=video_path.replace('"', "")
-    video_paths.append(mypath)
+video_path=input("Enter the path : ")
+mypath=video_path.replace('"', "")
 # mypath=os.getcwd()
 
-for path in video_paths:
-    onlyfiles = [path+'/'+f for f in listdir(path) if isfile(join(path, f))]
-   
+count=0
+onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 videofiles=[]
 
 print([item for item in onlyfiles])
 
 for item in onlyfiles:
     if item[-4:] == ".mkv":
-        videofiles.append(item)
+        videofiles.append(mypath+"/"+item)
         
 print([item for item in videofiles])
 
 for item in videofiles:
     os.system("ffmpeg -i {} -c:v libx264 -c:a aac {}".format('"'+item+'"','"'+item.replace("mkv","mp4")+'"'))
-
-
 # # print("ffmpeg -i {} -c:v libx264 -c:a aac {}".format('"'+item+'"','"'+item.replace("mkv","mp4")+'"'))
-    send2trash.send2trash(item)
-
-    checkfiles=[] 
     for path in video_paths:
         checkfiles = [path+'/'+f for f in listdir(path) if isfile(join(path, f))]
     if item.replace("mkv","mp4") in checkfiles:
         os.remove(item)    
+    # send2trash.send2trash(item)
 
-input("End")
