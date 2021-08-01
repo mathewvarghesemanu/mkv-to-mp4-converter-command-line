@@ -1,6 +1,9 @@
 import os
 from os import listdir
-mypath=os.getcwd()
+video_path=input("Enter the path : ")
+mypath=video_path
+# mypath=os.getcwd()
+
 from os.path import isfile, join
 count=0
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
@@ -10,7 +13,7 @@ print([item for item in onlyfiles])
 
 for item in onlyfiles:
     if item[-4:] == ".mkv":
-        videofiles.append(item)
+        videofiles.append(mypath+"/"+item)
         
 print([item for item in videofiles])
 
