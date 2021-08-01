@@ -1,7 +1,7 @@
 import os
 from os import listdir
 video_path=input("Enter the path : ")
-mypath=video_path
+mypath=video_path.replace('"', "")
 # mypath=os.getcwd()
 
 from os.path import isfile, join
