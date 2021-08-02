@@ -1,14 +1,14 @@
 ##Use os.remove(item) only if you are sure that eerything else is working
 
-
+''' Importing necessary header files'''
 import os
 from os import listdir
 from os.path import isfile, join
-import send2trash
+# import send2trash                         #is not working in windows, ignore                  
 
 video_paths=[]
 video_path=""
-Print("After adding all the folders one by one, press y to continue for the question below.")
+print("After adding all the folders one by one, press y to continue for the question below.")
 while 1:
     print(video_path)
     video_path=input("Enter the path : ")
@@ -32,16 +32,16 @@ for item in onlyfiles:
 print([item for item in videofiles])
 
 for item in videofiles:
-    os.system("ffmpeg -i {} -c:v libx264 -c:a aac {}".format('"'+item+'"','"'+item.replace("mkv","mp4")+'"'))
+    os.system("ffmpeg -i {} -c:v libx264 -c:a aac {}".format('"'+item+'"','"'+item.replace("mkv","mp4")+'"'))       #calling ffmpeg using the os command
 
 
-# # print("ffmpeg -i {} -c:v libx264 -c:a aac {}".format('"'+item+'"','"'+item.replace("mkv","mp4")+'"'))
-    send2trash.send2trash(item)
+
+    # send2trash.send2trash(item)           #ignore, not working
 
     checkfiles=[] 
     for path in video_paths:
         checkfiles = [path+'/'+f for f in listdir(path) if isfile(join(path, f))]
     if item.replace("mkv","mp4") in checkfiles:
-        os.remove(item)    
+        os.remove(item)                     #comment out if you don't wasnt to lose files. It deletes converted files after conversion. use with caution
 
 input("End")
