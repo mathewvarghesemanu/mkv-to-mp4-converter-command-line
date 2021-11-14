@@ -17,9 +17,10 @@ while 1:
     mypath=video_path.replace('"', "")
     video_paths.append(mypath)
 # mypath=os.getcwd()
-
+onlyfiles=[]
 for path in video_paths:
-    onlyfiles = [path+'/'+f for f in listdir(path) if isfile(join(path, f))]
+    onlyfile = [path+'/'+f for f in listdir(path) if isfile(join(path, f))]
+    onlyfiles.extend(onlyfile)
    
 videofiles=[]
 
